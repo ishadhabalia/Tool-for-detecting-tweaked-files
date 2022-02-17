@@ -30,8 +30,7 @@ def hashGenerator(filePaths, fileIDs, rootPath):
 	data = {}
 	for (filename, fileID) in zip(filePaths, fileIDs):
 		hashdump = sha256(filename)
-		filenameShort = filename.replace(rootPath,"")
-		data[fileID] = [hashdump, filenameShort]
+		data[fileID] = [hashdump, filename]
 	return data
 
 def filepathScan(directory):
@@ -54,7 +53,7 @@ def generate(dumpfile,path):
 		id=id[12:45]
 		# print(id)
 		fileIDs.append(id)
-
+	print(fileIDs)
 	hashdata = hashGenerator(filePaths, fileIDs, path)
 	with open(dumpfile, 'w') as fp:
 	    json.dump(hashdata, fp)
